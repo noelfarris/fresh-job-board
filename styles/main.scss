@@ -2,40 +2,46 @@ body {
 	background-image: url(../images/bg.png);
 	margin: 0;
 }
-.navbar {
-	border-top: 1em solid #525252;
-	height: 87px;
-	background-color: white;
-}
-
-.navWrapper {
-	margin: 0 auto;
-	width: 75%;
-	font-family: sans-serif;
-	margin-top: 1em;
-	span {
-		font-size: 2em;
-		color: #07391C;
-		font-weight: bold;
-	}
-	a {
-		text-decoration: none;
+nav {
+		overflow: hidden;
+		background: white;
+		padding-bottom: 1em;
+		font-family: sans-serif;
 		font-size: 1em;
-		margin-left: 1em;
-		color: #525252;
-		font-weight: bold;
-	}
-}
+		box-sizing: border-box;
 
-.imgWrapper {
+		.navHr {
+			background: RGBA(82, 82, 82, 1);
+			height: 1em;
+			margin-top: 0;
+		}
 
-	height: 3em;
-	width: 3.5em;
-	display: inline-block;
-	img {
-		width: 100%;
+		.fresh {
+			font-size: 1em;
+			margin-left: 0;
+			padding-left: 0;
+			font-weight: bolder;
+		}
+
+		a {
+			text-decoration: none;
+			color: black;
+			margin: 0 1%;
+			float: left;
+			padding: 1em;
+			font-size: .8em;
+			font-weight: bolder;
+		}
+		.logo {
+			background-size: contain;
+			background: url('../images/logo.png') no-repeat;
+			height: 2.5em;
+			background-size: 3em;
+			width: 4em;
+			float: left;
+			margin-left: 15%;
+		}
 	}
-}
 .damWrapper {
 	display: inline;
 }
@@ -59,12 +65,12 @@ textarea {
 	width: 100%;
 }
 .formWrapper {
+	box-sizing: border-box;
 	float: left;
-	width: 53%;
+	width: 96%;
 	background-color: white;
-	margin-left: 4em;
-	margin-top: .75em;
-	padding: 1em .7em .5em .5em;
+	margin: 1em 2% 0 2%;
+	padding: 1em;
 	box-shadow: 5px 5px 5px #ccc;
 }
 button {
@@ -78,13 +84,13 @@ button {
 	border-radius: .2em
 }
 .tips {
+	box-sizing: border-box;
 	font-size: 2em;
 	box-shadow: 5px 5px 5px #ccc;
-	margin-top: .4em;
-	margin-right: 2em;
+	margin: 1em 2% 0 2%;
 	float: right;
 	background-color: white;
-	width: 25%;
+	width: 96%;
 	padding: 1em;
 	margin-bottom: 1em;
 	h3 {
@@ -95,4 +101,16 @@ button {
 	border-bottom: 1px solid #525252;
 	font-size: .75em;
 	font-weight: bold;
+}
+
+@media screen and (min-width: 50em) {
+	body .formWrapper {
+		margin: 1em 1% 0 2%;
+		width: 64%;
+	}
+
+	body .tips {
+		margin: .6em 2% 0 1%;
+		width: 30%;
+	}
 }

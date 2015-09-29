@@ -20025,46 +20025,43 @@ module.exports = React.createClass({
 
 	render: function render() {
 		return React.createElement(
-			"section",
-			{ className: "navbar" },
+			"nav",
+			null,
+			React.createElement("hr", { className: "navHr" }),
+			React.createElement("div", { className: "logo" }),
 			React.createElement(
-				"div",
-				{ className: "navWrapper" },
+				"a",
+				{ className: "fresh", href: "#" },
 				React.createElement(
-					"div",
-					{ className: "imgWrapper" },
-					React.createElement("img", { src: "../../images/logo.png" })
-				),
-				React.createElement(
-					"span",
+					"strong",
 					null,
-					"Fresh Jobs"
-				),
-				React.createElement(
-					"a",
-					{ href: "#" },
-					"JOBS"
-				),
-				React.createElement(
-					"a",
-					{ href: "#" },
-					"COMPANIES"
-				),
-				React.createElement(
-					"a",
-					{ href: "#" },
-					"CITIES"
-				),
-				React.createElement(
-					"a",
-					{ href: "#" },
-					"WHY FRESH?"
-				),
-				React.createElement(
-					"a",
-					{ href: "#" },
-					"FOR EMPLOYERS"
+					"FRESH JOBS"
 				)
+			),
+			React.createElement(
+				"a",
+				{ href: "#" },
+				"JOBS"
+			),
+			React.createElement(
+				"a",
+				{ href: "#" },
+				"COMPANIES"
+			),
+			React.createElement(
+				"a",
+				{ href: "#" },
+				"CITIES"
+			),
+			React.createElement(
+				"a",
+				{ href: "#" },
+				"WHY FRESH?"
+			),
+			React.createElement(
+				"a",
+				{ href: "#" },
+				"FOR EMPLOYERS"
 			)
 		);
 	}
