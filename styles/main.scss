@@ -65,6 +65,7 @@ textarea {
 	width: 100%;
 }
 .formWrapper {
+	visibility: hidden;
 	box-sizing: border-box;
 	float: left;
 	width: 96%;
@@ -84,6 +85,7 @@ button {
 	border-radius: .2em
 }
 .tips {
+	visibility: hidden;
 	box-sizing: border-box;
 	font-size: 2em;
 	box-shadow: 5px 5px 5px #ccc;
@@ -102,6 +104,87 @@ button {
 	font-size: .75em;
 	font-weight: bold;
 }
+.jobRow {
+	width: 96%;
+	margin: 1em 2% 0 2%;
+	float: left;
+	background-color: white;
+	padding: 1.5em 1.5em 0 1.5em;
+	box-sizing: border-box;
+
+	.title {
+		font-size: 1.5em;
+		color: #496752;
+		font-weight: lighter;
+		display: inline-block;
+		margin-bottom: .5em;
+		margin-top: 0em;
+	}
+	div {
+		margin-bottom: .3em;
+	}
+	span {
+		margin-right: .2em;
+	}
+	.date {
+		font-size: .5em;
+		color: gray; 
+		float: right;
+		margin-top: 0em;
+	}
+	.companyName {
+		color: #262A1C;
+		font-weight: bold;
+		margin-right: .2em;
+	}
+	.location {
+		color: #666A62;
+	}
+	.jobDesc {
+		color: #BDBDBD;
+		margin-top: .3em;
+	}
+	.tags {
+		border: 1px solid #E5E895;
+		background-color: #F9FAE9;
+	}
+
+}
+.companyBox {
+	width: 96%;
+	margin: 1em 2% 0 2%;
+	float: right;
+	background-color: white;
+	padding: 1.5em;
+	box-sizing: border-box;
+	text-align: center;
+
+	.companyInfo {
+		font-size: 2em;
+		font-weight: lighter;
+		border-bottom: 2px solid gray;
+	}
+	.bgImage {
+		width: 100%;
+	}
+	.logo {
+		display: block;
+		margin: -5em auto 0;
+	}
+	.compName {
+		color: #359247;
+		font-family: none;
+		font-size: 3.5em;
+		font-weight: lighter;
+		margin-bottom: 0;
+	}
+	.compLocation {
+		color: #666666;
+		font-weight: lighter;
+		margin-top: 0;
+	}
+
+}
 
 @media screen and (min-width: 50em) {
 	body .formWrapper {
@@ -110,6 +193,15 @@ button {
 	}
 
 	body .tips {
+		margin: .6em 2% 0 1%;
+		width: 30%;
+	}
+	body .jobRow {
+		margin: 1em 1% 0 2%;
+		width: 64%;
+	}
+
+	body .companyBox {
 		margin: .6em 2% 0 1%;
 		width: 30%;
 	}

@@ -32538,10 +32538,12 @@ var JobFormComponent = require('./jobFormComponent.js');
 var JobRowComponent = require('./jobRowComponent.js');
 var JobsModel = require('../models/jobsModel.js');
 var CompanyModel = require('../models/companyModel.js');
+var CompanyBoxComponent = require('./companyBoxComponent.js');
 
-var JobsModel1 = new JobsModel({ title: 'Senior Frontend Engineer', description: 'Senior Frontend Engineer sovle hard problems with a team of infastructure stuff.', date: Date(),
+var JobsModel1 = new JobsModel({ title: 'Senior Frontend Engineer', description: 'Senior Frontend Engineer sovle hard problems with a team of infastructure stuff.', date: new Date().toDateString(),
 	tags: ['angularjs', 'd3.js', 'javascript', 'UI', 'CSS'] });
-var CompanyModel1 = new CompanyModel({ name: 'NSONE', location: 'New York, NY' });
+var CompanyModel1 = new CompanyModel({ name: 'NSONE', location: 'New York, NY', logo: '../../images/featured-logo.jpg', bgImage: '../../images/featured.jpg' });
+var CompanyModel2 = new CompanyModel({ name: 'MaxPlay', location: 'Austin, Tx', logo: '../../images/featured-logo.jpg', bgImage: '../../images/featured.jpg' });
 module.exports = React.createClass({
 	displayName: 'exports',
 
@@ -32552,12 +32554,46 @@ module.exports = React.createClass({
 			React.createElement(NavigationComponent, null),
 			React.createElement(JobFormComponent, null),
 			React.createElement(JobTipsComponent, null),
-			React.createElement(JobRowComponent, { jobModel: JobsModel1, compModel: CompanyModel1 })
+			React.createElement(JobRowComponent, { jobModel: JobsModel1, compModel: CompanyModel1 }),
+			React.createElement(CompanyBoxComponent, { compModel: CompanyModel2 })
 		);
 	}
 });
 
-},{"../models/companyModel.js":166,"../models/jobsModel.js":167,"./jobFormComponent.js":161,"./jobRowComponent.js":162,"./jobTipsComponent.js":163,"./navigationComponent.js":164,"react":159}],161:[function(require,module,exports){
+},{"../models/companyModel.js":167,"../models/jobsModel.js":168,"./companyBoxComponent.js":161,"./jobFormComponent.js":162,"./jobRowComponent.js":163,"./jobTipsComponent.js":164,"./navigationComponent.js":165,"react":159}],161:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+module.exports = React.createClass({
+	displayName: 'exports',
+
+	render: function render() {
+		return React.createElement(
+			'section',
+			{ className: 'companyBox' },
+			React.createElement(
+				'h2',
+				{ className: 'companyInfo' },
+				'Company Information'
+			),
+			React.createElement('img', { className: 'bgImage', src: this.props.compModel.get('bgImage') }),
+			React.createElement('img', { className: 'logo', src: this.props.compModel.get('logo') }),
+			React.createElement(
+				'h1',
+				{ className: 'compName' },
+				this.props.compModel.get('name')
+			),
+			React.createElement(
+				'h3',
+				{ className: 'compLocation' },
+				this.props.compModel.get('location')
+			)
+		);
+	}
+});
+
+},{"react":159}],162:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32613,7 +32649,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"react":159}],162:[function(require,module,exports){
+},{"react":159}],163:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32636,14 +32672,23 @@ module.exports = React.createClass({
 				this.props.jobModel.get('date')
 			),
 			React.createElement(
-				'span',
-				{ className: 'companyName' },
-				this.props.compModel.get('name')
-			),
-			React.createElement(
-				'span',
-				{ className: 'location' },
-				this.props.compModel.get('location')
+				'div',
+				null,
+				React.createElement(
+					'span',
+					{ className: 'companyName' },
+					this.props.compModel.get('name')
+				),
+				React.createElement(
+					'span',
+					{ className: 'dot' },
+					'·'
+				),
+				React.createElement(
+					'span',
+					{ className: 'location' },
+					this.props.compModel.get('location')
+				)
 			),
 			React.createElement(
 				'p',
@@ -32654,12 +32699,13 @@ module.exports = React.createClass({
 				'div',
 				{ className: 'tags' },
 				this.props.jobModel.get('tags')
-			)
+			),
+			React.createElement('hr', null)
 		);
 	}
 });
 
-},{"react":159}],163:[function(require,module,exports){
+},{"react":159}],164:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32730,7 +32776,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"react":159}],164:[function(require,module,exports){
+},{"react":159}],165:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -32754,42 +32800,50 @@ module.exports = React.createClass({
 				)
 			),
 			React.createElement(
-				"a",
-				{ href: "#" },
-				"JOBS"
+				"div",
+				null,
+				React.createElement(
+					"a",
+					{ href: "#" },
+					"JOBS"
+				),
+				React.createElement(
+					"a",
+					{ href: "#" },
+					"COMPANIES"
+				),
+				React.createElement(
+					"a",
+					{ href: "#" },
+					"CITIES"
+				)
 			),
 			React.createElement(
-				"a",
-				{ href: "#" },
-				"COMPANIES"
-			),
-			React.createElement(
-				"a",
-				{ href: "#" },
-				"CITIES"
-			),
-			React.createElement(
-				"a",
-				{ href: "#" },
-				"WHY FRESH?"
-			),
-			React.createElement(
-				"a",
-				{ href: "#" },
-				"FOR EMPLOYERS"
+				"div",
+				null,
+				React.createElement(
+					"a",
+					{ href: "#" },
+					"WHY FRESH?"
+				),
+				React.createElement(
+					"a",
+					{ href: "#" },
+					"FOR EMPLOYERS"
+				)
 			)
 		);
 	}
 });
 
-},{"react":159}],165:[function(require,module,exports){
+},{"react":159}],166:[function(require,module,exports){
 'use strict';
 var React = require('react');
 var AppComponent = require('./components/appComponent.js');
 var mainElement = document.getElementById('main-content');
 React.render(React.createElement(AppComponent, null), mainElement);
 
-},{"./components/appComponent.js":160,"react":159}],166:[function(require,module,exports){
+},{"./components/appComponent.js":160,"react":159}],167:[function(require,module,exports){
 'use strict';
 
 var Backbone = require('backbone');
@@ -32798,11 +32852,14 @@ module.exports = Backbone.Model.extend({
 	defaults: {
 		name: '',
 		location: '',
+		logo: '',
+		bgImage: '',
+		size: null,
 		id: null
 	}
 });
 
-},{"backbone":1}],167:[function(require,module,exports){
+},{"backbone":1}],168:[function(require,module,exports){
 'use strict';
 
 var Backbone = require('backbone');
@@ -32817,7 +32874,7 @@ module.exports = Backbone.Model.extend({
 	}
 });
 
-},{"backbone":1}]},{},[165])
+},{"backbone":1}]},{},[166])
 
 
 //# sourceMappingURL=bundle.js.map
