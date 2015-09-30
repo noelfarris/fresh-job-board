@@ -148,7 +148,14 @@ button {
 		border: 1px solid #E5E895;
 		background-color: #F9FAE9;
 	}
-
+.joblist {
+	width: 96%;
+	margin: 1em 2% 0 2%;
+	float: right;
+	background-color: white;
+	padding: 1.5em;
+	box-sizing: border-box;
+}
 }
 .companyBox {
 	width: 96%;

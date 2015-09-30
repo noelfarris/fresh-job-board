@@ -32531,6 +32531,26 @@ module.exports = require('./lib/React');
 },{"./lib/React":32}],160:[function(require,module,exports){
 'use strict';
 
+var Backbone = require('backbone');
+var CompanyModel = require('../models/companyModel.js');
+
+module.exports = Backbone.Collection.extend({
+	model: CompanyModel
+});
+
+},{"../models/companyModel.js":172,"backbone":1}],161:[function(require,module,exports){
+'use strict';
+
+var Backbone = require('backbone');
+var JobsModel = require('../models/jobsModel.js');
+
+module.exports = Backbone.Collection.extend({
+	model: JobsModel
+});
+
+},{"../models/jobsModel.js":173,"backbone":1}],162:[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var NavigationComponent = require('./navigationComponent.js');
 var JobTipsComponent = require('./jobTipsComponent.js');
@@ -32539,11 +32559,10 @@ var JobRowComponent = require('./jobRowComponent.js');
 var JobsModel = require('../models/jobsModel.js');
 var CompanyModel = require('../models/companyModel.js');
 var CompanyBoxComponent = require('./companyBoxComponent.js');
+var CompanyData = require('../data/companyData.js');
+var JobsData = require('../data/jobsData.js');
+var JobListComponent = require('./jobListComponent.js');
 
-var JobsModel1 = new JobsModel({ title: 'Senior Frontend Engineer', description: 'Senior Frontend Engineer sovle hard problems with a team of infastructure stuff.', date: new Date().toDateString(),
-	tags: ['angularjs', 'd3.js', 'javascript', 'UI', 'CSS'] });
-var CompanyModel1 = new CompanyModel({ name: 'NSONE', location: 'New York, NY', logo: '../../images/featured-logo.jpg', bgImage: '../../images/featured.jpg' });
-var CompanyModel2 = new CompanyModel({ name: 'MaxPlay', location: 'Austin, Tx', logo: '../../images/featured-logo.jpg', bgImage: '../../images/featured.jpg' });
 module.exports = React.createClass({
 	displayName: 'exports',
 
@@ -32554,13 +32573,13 @@ module.exports = React.createClass({
 			React.createElement(NavigationComponent, null),
 			React.createElement(JobFormComponent, null),
 			React.createElement(JobTipsComponent, null),
-			React.createElement(JobRowComponent, { jobModel: JobsModel1, compModel: CompanyModel1 }),
-			React.createElement(CompanyBoxComponent, { compModel: CompanyModel2 })
+			React.createElement(JobListComponent, { jobs: JobsData, company: CompanyData }),
+			React.createElement(CompanyBoxComponent, { company: CompanyData })
 		);
 	}
 });
 
-},{"../models/companyModel.js":167,"../models/jobsModel.js":168,"./companyBoxComponent.js":161,"./jobFormComponent.js":162,"./jobRowComponent.js":163,"./jobTipsComponent.js":164,"./navigationComponent.js":165,"react":159}],161:[function(require,module,exports){
+},{"../data/companyData.js":169,"../data/jobsData.js":170,"../models/companyModel.js":172,"../models/jobsModel.js":173,"./companyBoxComponent.js":163,"./jobFormComponent.js":164,"./jobListComponent.js":165,"./jobRowComponent.js":166,"./jobTipsComponent.js":167,"./navigationComponent.js":168,"react":159}],163:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32577,23 +32596,23 @@ module.exports = React.createClass({
 				{ className: 'companyInfo' },
 				'Company Information'
 			),
-			React.createElement('img', { className: 'bgImage', src: this.props.compModel.get('bgImage') }),
-			React.createElement('img', { className: 'logo', src: this.props.compModel.get('logo') }),
+			React.createElement('img', { className: 'bgImage', src: this.props.company.get('bgImage') }),
+			React.createElement('img', { className: 'logo', src: this.props.company.get('logo') }),
 			React.createElement(
 				'h1',
 				{ className: 'compName' },
-				this.props.compModel.get('name')
+				this.props.company.get('name')
 			),
 			React.createElement(
 				'h3',
 				{ className: 'compLocation' },
-				this.props.compModel.get('location')
+				this.props.company.get('location')
 			)
 		);
 	}
 });
 
-},{"react":159}],162:[function(require,module,exports){
+},{"react":159}],164:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32649,7 +32668,30 @@ module.exports = React.createClass({
 	}
 });
 
-},{"react":159}],163:[function(require,module,exports){
+},{"react":159}],165:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var JobRowComponent = require('./jobRowComponent.js');
+module.exports = React.createClass({
+	displayName: 'exports',
+
+	render: function render() {
+		var companies = this.props.company;
+		var jobList = this.props.jobs.map(function (job) {
+			var companyId = job.get('companyId');
+			var company = companies.get(companyId);
+			return React.createElement(JobRowComponent, { job: job, company: company });
+		});
+		return React.createElement(
+			'section',
+			{ className: 'jobList' },
+			jobList
+		);
+	}
+});
+
+},{"./jobRowComponent.js":166,"react":159}],166:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32664,12 +32706,12 @@ module.exports = React.createClass({
 			React.createElement(
 				'h3',
 				{ className: 'title' },
-				this.props.jobModel.get('title')
+				this.props.job.get('title')
 			),
 			React.createElement(
 				'span',
 				{ className: 'date' },
-				this.props.jobModel.get('date')
+				this.props.job.get('date')
 			),
 			React.createElement(
 				'div',
@@ -32677,7 +32719,7 @@ module.exports = React.createClass({
 				React.createElement(
 					'span',
 					{ className: 'companyName' },
-					this.props.compModel.get('name')
+					this.props.company.get('name')
 				),
 				React.createElement(
 					'span',
@@ -32687,25 +32729,25 @@ module.exports = React.createClass({
 				React.createElement(
 					'span',
 					{ className: 'location' },
-					this.props.compModel.get('location')
+					this.props.company.get('location')
 				)
 			),
 			React.createElement(
 				'p',
 				{ className: 'jobDesc' },
-				this.props.jobModel.get('description')
+				this.props.job.get('description')
 			),
 			React.createElement(
 				'div',
 				{ className: 'tags' },
-				this.props.jobModel.get('tags')
+				this.props.job.get('tags')
 			),
 			React.createElement('hr', null)
 		);
 	}
 });
 
-},{"react":159}],164:[function(require,module,exports){
+},{"react":159}],167:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32776,7 +32818,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"react":159}],165:[function(require,module,exports){
+},{"react":159}],168:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -32836,14 +32878,28 @@ module.exports = React.createClass({
 	}
 });
 
-},{"react":159}],166:[function(require,module,exports){
+},{"react":159}],169:[function(require,module,exports){
+'use strict';
+
+var CompanyCollection = require('../collections/companyCollection.js');
+
+module.exports = new CompanyCollection([{ name: 'Crust Inc.', location: "Rock City, USA", logo: '../../images/featured-logo.jpg', bgImage: '../../images/featured.jpg', size: 1, id: 1 }, { name: 'Shades', location: "The Mall", logo: '../../images/featured-logo.jpg', bgImage: '../../images/featured.jpg', size: 1, id: 2 }, { name: 'Cafe', location: "Cool City, USA", logo: '../../images/featured-logo.jpg', bgImage: '../../images/featured.jpg', size: 1, id: 3 }, { name: 'George Jones', location: "My house", logo: '../../images/featured-logo.jpg', bgImage: '../../images/featured.jpg', size: 1, id: 4 }]);
+
+},{"../collections/companyCollection.js":160}],170:[function(require,module,exports){
+'use strict';
+
+var JobsCollection = require('../collections/jobsCollection');
+
+module.exports = new JobsCollection([{ title: 'Sandwich Artist', descrption: "Come to work and make some sandwiches, deal with dumb customers", date: new Date().toDateString(), tags: ['sandwhiches', 'annoying', 'bread'], id: 1, companyId: 1 }, { title: 'Sunglasses Sales', descrption: "Work at a kiosk in the mall selling sunglasses", date: new Date().toDateString(), tags: ['glasses', 'sun', 'foodcourt'], id: 2, companyId: 2 }, { title: 'Coffe Drinker', descrption: "Drink the bean based sludge like beverage and get wired all day, every day", date: new Date().toDateString(), tags: ['sludge', 'wired', 'cafe'], id: 3, companyId: 3 }, { title: 'Wallpaper theft prevention', descrption: "Come to my house and make sure nobody steals my wallpaper", date: new Date().toDateString(), tags: ['kids', 'bad people', 'I hate crime'], id: 4, companyId: 4 }, { title: 'do dishes', descrption: 'Come to my house and do my dishes', date: new Date().toDateString(), tags: ["help", "clean", "I'm lazy"], id: 5, companyId: 4 }]);
+
+},{"../collections/jobsCollection":161}],171:[function(require,module,exports){
 'use strict';
 var React = require('react');
 var AppComponent = require('./components/appComponent.js');
 var mainElement = document.getElementById('main-content');
 React.render(React.createElement(AppComponent, null), mainElement);
 
-},{"./components/appComponent.js":160,"react":159}],167:[function(require,module,exports){
+},{"./components/appComponent.js":162,"react":159}],172:[function(require,module,exports){
 'use strict';
 
 var Backbone = require('backbone');
@@ -32859,7 +32915,7 @@ module.exports = Backbone.Model.extend({
 	}
 });
 
-},{"backbone":1}],168:[function(require,module,exports){
+},{"backbone":1}],173:[function(require,module,exports){
 'use strict';
 
 var Backbone = require('backbone');
@@ -32870,11 +32926,12 @@ module.exports = Backbone.Model.extend({
 		description: '',
 		date: new Date(),
 		tags: [],
-		id: null
+		id: null,
+		companyId: null
 	}
 });
 
-},{"backbone":1}]},{},[166])
+},{"backbone":1}]},{},[171])
 
 
 //# sourceMappingURL=bundle.js.map
