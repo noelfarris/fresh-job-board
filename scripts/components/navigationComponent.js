@@ -10,8 +10,8 @@ module.exports = React.createClass({
 					<a className="fresh" href="#"><strong>FRESH JOBS</strong></a>
 					
 					<div>
-						<a href="#">JOBS</a>
-						<a href="#">COMPANIES</a>
+						<a href="#jobListPage">JOBS</a>
+						<a href="#formPage">COMPANIES</a>
 						<a href="#">CITIES</a>
 					</div>
 					<div>

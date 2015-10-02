@@ -7,6 +7,6 @@ module.exports = Backbone.Model.extend({
 		date: new Date,
 		tags: [],
 		id: null,
-		companyId: null
+		companyId: 2
 	}
 });
